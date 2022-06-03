@@ -1,4 +1,5 @@
 let myLibrary = [];
+const bookcase = document.getElementById("bookcase");
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -17,6 +18,34 @@ function addBookToLibrary() {
   let read = prompt("Have you read the book?", false);
   let book = new Book(title, author, pages, read);
   myLibrary.push(book);
+}
+
+function displayBooks() {
+  while(bookcase.firstChild) {
+    bookcase.removeChild(bookcase.firstChild);
+  }
+
+  myLibrary.forEach(book => {
+    let card = document.createElement("div");
+    card.classList.add("card");
+    let title = document.createElement("div");
+    title.classList.add("title");
+    title.textContent = book.title;
+    card.appendChild(title);
+    let author = document.createElement("div");
+    author.classList.add("author");
+    author.textContent = book.author;
+    card.appendChild(author);
+    let pages = document.createElement("div");
+    pages.classList.add("pages");
+    pages.textContent = book.pages;
+    card.appendChild(pages);
+    let read = document.createElement("div");
+    read.classList.add("read");
+    read.textContent = book.read;
+    card.appendChild(read);
+    bookcase.appendChild(card);
+  });
 }
 
 myLibrary[0] = new Book("Book1", "Author1", 15, true);
