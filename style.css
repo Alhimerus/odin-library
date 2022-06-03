@@ -2,3 +2,19 @@
   margin: 0;
   padding: 0;
 }
+
+#bookcase {
+  background-color: rgb(100, 50, 20);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  width: 120px;
+  height: 180px;
+  flex: 0 0 auto;
+}
