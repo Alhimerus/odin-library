@@ -1,5 +1,6 @@
 let myLibrary = [];
 const bookcase = document.getElementById("bookcase");
+const newBookButton = document.getElementsByClassName("new-book")[0];
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -47,6 +48,12 @@ function displayBooks() {
     bookcase.appendChild(card);
   });
 }
+
+function addNewBook() {
+  
+}
+
+newBookButton.addEventListener("click", addNewBook);
 
 myLibrary[0] = new Book("Book1", "Author1", 15, true);
 myLibrary[1] = new Book("Book2", "Author2", 20, false);
