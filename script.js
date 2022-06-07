@@ -42,7 +42,7 @@ function displayBooks() {
     card.appendChild(pages);
     let read = document.createElement("div");
     read.classList.add("read");
-    read.textContent = (book.read) ? "Has been read" : "Hasn't been read yet";
+    read.textContent = (book.read) ? "Has been read" : "Hasn't been read";
     card.appendChild(read);
     bookcase.appendChild(card);
   });

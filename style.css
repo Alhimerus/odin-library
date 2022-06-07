@@ -14,7 +14,7 @@
 
 .card {
   background-color: rgb(255, 255, 255);
-  width: 160px;
+  width: max(160px, min-content);
   height: 200px;
   flex: 0 0 auto;
   text-align: center;
@@ -22,17 +22,21 @@
 }
 
 .title {
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
 .author {
+  font-size: 18px;
   margin-bottom: 25px;
 }
 
 .pages {
+  font-size: 18px;
   margin-bottom: 15px;
 }
 
 .read {
+  font-size: 16px;
   margin-bottom: 10px;
 }
