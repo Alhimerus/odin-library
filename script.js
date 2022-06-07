@@ -34,15 +34,15 @@ function displayBooks() {
     card.appendChild(title);
     let author = document.createElement("div");
     author.classList.add("author");
-    author.textContent = book.author;
+    author.textContent = "by " + book.author;
     card.appendChild(author);
     let pages = document.createElement("div");
     pages.classList.add("pages");
-    pages.textContent = book.pages;
+    pages.textContent = book.pages + " pages";
     card.appendChild(pages);
     let read = document.createElement("div");
     read.classList.add("read");
-    read.textContent = book.read;
+    read.textContent = (book.read) ? "Has been read" : "Hasn't been read yet";
     card.appendChild(read);
     bookcase.appendChild(card);
   });
@@ -52,3 +52,5 @@ myLibrary[0] = new Book("Book1", "Author1", 15, true);
 myLibrary[1] = new Book("Book2", "Author2", 20, false);
 myLibrary[2] = new Book("Book3", "Author3", 25, true);
 myLibrary[3] = new Book("Book4", "Author4", 30, false);
+
+displayBooks();
