@@ -1,6 +1,13 @@
 let myLibrary = [];
 const bookcase = document.getElementById("bookcase");
 const newBookButton = document.getElementsByClassName("new-book")[0];
+const formContainer = document.getElementById("container");
+const formTitle = document.getElementById("title");
+const formAuthor = document.getElementById("author");
+const formPages = document.getElementById("pages");
+const formRead = document.getElementById("read");
+const formAdd = document.getElementById("add");
+const formCancel = document.getElementById("cancel");
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -49,11 +56,26 @@ function displayBooks() {
   });
 }
 
+function openNewBookForm() {
+  formContainer.classList.remove("hidden");
+  formContainer.classList.add("shown");
+}
+
 function addNewBook() {
   
 }
 
-newBookButton.addEventListener("click", addNewBook);
+function cancelNewBook() {
+  formTitle.value = "";
+  formAuthor.value = "";
+  formPages.value = "";
+  formRead.value = "no";
+  formContainer.classList.remove("shown");
+  formContainer.classList.add("hidden");
+}
+
+newBookButton.addEventListener("click", openNewBookForm);
+formCancel.addEventListener("click", cancelNewBook)
 
 myLibrary[0] = new Book("Book1", "Author1", 15, true);
 myLibrary[1] = new Book("Book2", "Author2", 20, false);

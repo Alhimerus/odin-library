@@ -94,3 +94,20 @@ form > button {
   font-size: 18px;
   padding: 5px 15px;
 }
+
+div.hidden {
+  display: none;
+}
+
+div.shown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+}

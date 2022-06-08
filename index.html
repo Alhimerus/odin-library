@@ -11,7 +11,7 @@
 <body>
   <div class="header"><button class="new-book">NEW BOOK</button></div>
   <div id="bookcase"></div>
-  <div class="">
+  <div id="container" class="hidden">
     <form action="" class="new-book-form">
       <label for="title">Title:</label>
       <input type="text" name="title" id="title">
@@ -22,10 +22,10 @@
       <label for="read">Have you read the book?:</label>
       <select name="read" id="read">
         <option value="yes">YES</option>
-        <option value="no">NO</option>
+        <option value="no" selected>NO</option>
       </select>
-      <button type="button" class="cancel">CANCEL</button>
-      <button type="button" class="add">ADD BOOK</button>
+      <button type="button" id="cancel">CANCEL</button>
+      <button type="button" id="add">ADD BOOK</button>
     </form>
   </div>
 </body>
