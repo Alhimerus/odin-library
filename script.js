@@ -19,17 +19,8 @@ function Book(title, author, pages, read) {
   }
 }
 
-function addBookToLibrary() {
-  let title = prompt("What's the title of the book?", "TITLE");
-  let author = prompt("Who's the author of the book?", "AUTHOR");
-  let pages = prompt("How many pages does the book have?", 0);
-  let read = prompt("Have you read the book?", false);
-  let book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-}
-
 function displayBooks() {
-  while(bookcase.firstChild) {
+  while (bookcase.firstChild) {
     bookcase.removeChild(bookcase.firstChild);
   }
 
@@ -50,7 +41,7 @@ function displayBooks() {
     card.appendChild(pages);
     let read = document.createElement("div");
     read.classList.add("read");
-    read.textContent = (book.read) ? "Has been read" : "Hasn't been read";
+    read.textContent = (book.read === "yes") ? "Has been read" : "Hasn't been read";
     card.appendChild(read);
     bookcase.appendChild(card);
   });
@@ -62,7 +53,20 @@ function openNewBookForm() {
 }
 
 function addNewBook() {
-  
+  let title = formTitle.value;
+  let author = formAuthor.value;
+  let pages = formPages.value;
+  let read = formRead.value;
+  if (!title || !author || !pages) {
+    alert("Please fill out all fields");
+  } else if (!formPages.validity.valid) {
+    alert("The 'Number of pages:' should only contain numbers");
+  } else {
+    let book = new Book(title, author, pages, read);
+    myLibrary.push(book);
+    displayBooks();
+    cancelNewBook();
+  }
 }
 
 function cancelNewBook() {
@@ -75,7 +79,8 @@ function cancelNewBook() {
 }
 
 newBookButton.addEventListener("click", openNewBookForm);
-formCancel.addEventListener("click", cancelNewBook)
+formCancel.addEventListener("click", cancelNewBook);
+formAdd.addEventListener("click", addNewBook);
 
 myLibrary[0] = new Book("Book1", "Author1", 15, true);
 myLibrary[1] = new Book("Book2", "Author2", 20, false);
