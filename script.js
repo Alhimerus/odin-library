@@ -43,6 +43,13 @@ function displayBooks() {
     read.classList.add("read");
     read.textContent = (book.read === "yes") ? "Has been read" : "Hasn't been read";
     card.appendChild(read);
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("delete");
+    deleteButton.textContent = "DELETE";
+    deleteButton.addEventListener("click", () => {
+      deleteBook(myLibrary.indexOf(book));
+    });
+    card.appendChild(deleteButton);
     bookcase.appendChild(card);
   });
 }
@@ -55,12 +62,14 @@ function openNewBookForm() {
 function addNewBook() {
   let title = formTitle.value;
   let author = formAuthor.value;
-  let pages = formPages.value;
+  let pages = Number(formPages.value);
   let read = formRead.value;
   if (!title || !author || !pages) {
     alert("Please fill out all fields");
   } else if (!formPages.validity.valid) {
     alert("The 'Number of pages:' should only contain numbers");
+  } else if (formPages.value === 0) {
+    alert("The 'Number of pages:' should be higher than 0");
   } else {
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
@@ -78,13 +87,18 @@ function cancelNewBook() {
   formContainer.classList.add("hidden");
 }
 
+function deleteBook(index) {
+  myLibrary.splice(index, 1);
+  displayBooks();
+}
+
 newBookButton.addEventListener("click", openNewBookForm);
 formCancel.addEventListener("click", cancelNewBook);
 formAdd.addEventListener("click", addNewBook);
 
-myLibrary[0] = new Book("Book1", "Author1", 15, true);
-myLibrary[1] = new Book("Book2", "Author2", 20, false);
-myLibrary[2] = new Book("Book3", "Author3", 25, true);
-myLibrary[3] = new Book("Book4", "Author4", 30, false);
+myLibrary[0] = new Book("Book1", "Author1", 15, "yes");
+myLibrary[1] = new Book("Book2", "Author2", 20, "no");
+myLibrary[2] = new Book("Book3", "Author3", 25, "yes");
+myLibrary[3] = new Book("Book4", "Author4", 30, "no");
 
 displayBooks();
