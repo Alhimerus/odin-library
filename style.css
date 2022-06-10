@@ -16,10 +16,11 @@
 .card {
   background-color: rgb(255, 255, 255);
   min-width: 150px;
-  height: 200px;
   flex: 0 0 auto;
-  text-align: center;
+  align-items: center;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -50,7 +51,8 @@ div.header {
 
 button.new-book,
 form > button,
-.card > .delete {
+.card > .delete,
+.card > .change-reading-status {
   font-size: 30px;
   padding: 10px 30px;
   background-color: rgb(200, 175, 175);
@@ -62,13 +64,15 @@ form > button,
 
 button.new-book:hover,
 form > button:hover,
-.card > .delete:hover {
+.card > .delete:hover,
+.card > .change-reading-status:hover {
   background-color: rgb(175, 150, 150);
 } 
 
 button.new-book:active,
 form > button:active,
-.card > .delete:active {
+.card > .delete:active,
+.card > .change-reading-status:active {
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.3),
               inset -2px -2px 2px rgba(255, 255, 255, 0.3);
 }
@@ -115,8 +119,13 @@ div.shown {
   z-index: 100;
 }
 
-.card > .delete {
+.card > .delete,
+.card > .change-reading-status {
   padding: 3px 10px;
   font-size: 14px;
   font-weight: 500;
+}
+
+.card > .change-reading-status {
+  margin-bottom: 10px;
 }

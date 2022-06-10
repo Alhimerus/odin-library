@@ -14,9 +14,6 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = () => {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}.`;
-  }
 }
 
 function displayBooks() {
@@ -43,6 +40,13 @@ function displayBooks() {
     read.classList.add("read");
     read.textContent = (book.read === "yes") ? "Has been read" : "Hasn't been read";
     card.appendChild(read);
+    let changeReadingStatusButton = document.createElement("button");
+    changeReadingStatusButton.classList.add("change-reading-status");
+    changeReadingStatusButton.textContent = "READ/UNREAD";
+    changeReadingStatusButton.addEventListener("click", () => {
+      changeReadingStatus(myLibrary.indexOf(book));
+    });
+    card.appendChild(changeReadingStatusButton);
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete");
     deleteButton.textContent = "DELETE";
@@ -62,16 +66,16 @@ function openNewBookForm() {
 function addNewBook() {
   let title = formTitle.value;
   let author = formAuthor.value;
-  let pages = Number(formPages.value);
+  let pages = formPages.value;
   let read = formRead.value;
   if (!title || !author || !pages) {
     alert("Please fill out all fields");
   } else if (!formPages.validity.valid) {
     alert("The 'Number of pages:' should only contain numbers");
-  } else if (formPages.value === 0) {
+  } else if (Number(formPages.value) === 0) {
     alert("The 'Number of pages:' should be higher than 0");
   } else {
-    let book = new Book(title, author, pages, read);
+    let book = new Book(title, author, Number(pages), read);
     myLibrary.push(book);
     displayBooks();
     cancelNewBook();
@@ -92,13 +96,11 @@ function deleteBook(index) {
   displayBooks();
 }
 
+function changeReadingStatus(index) {
+  myLibrary[index].read = (myLibrary[index].read==="yes") ? "no" : "yes";
+  displayBooks();
+}
+
 newBookButton.addEventListener("click", openNewBookForm);
 formCancel.addEventListener("click", cancelNewBook);
 formAdd.addEventListener("click", addNewBook);
-
-myLibrary[0] = new Book("Book1", "Author1", 15, "yes");
-myLibrary[1] = new Book("Book2", "Author2", 20, "no");
-myLibrary[2] = new Book("Book3", "Author3", 25, "yes");
-myLibrary[3] = new Book("Book4", "Author4", 30, "no");
-
-displayBooks();
