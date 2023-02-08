@@ -9,53 +9,59 @@ const formRead = document.getElementById("read");
 const formAdd = document.getElementById("add");
 const formCancel = document.getElementById("cancel");
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-function displayBooks() {
-  while (bookcase.firstChild) {
-    bookcase.removeChild(bookcase.firstChild);
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
   }
 
-  myLibrary.forEach(book => {
+  createCard() {
     let card = document.createElement("div");
     card.classList.add("card");
     let title = document.createElement("div");
     title.classList.add("title");
-    title.textContent = book.title;
+    title.textContent = this.title;
     card.appendChild(title);
     let author = document.createElement("div");
     author.classList.add("author");
-    author.textContent = "by " + book.author;
+    author.textContent = "by " + this.author;
     card.appendChild(author);
     let pages = document.createElement("div");
     pages.classList.add("pages");
-    pages.textContent = book.pages + " pages";
+    pages.textContent = this.pages + " pages";
     card.appendChild(pages);
     let read = document.createElement("div");
     read.classList.add("read");
-    read.textContent = (book.read === "yes") ? "Has been read" : "Hasn't been read";
+    read.textContent = (this.read === "yes") ? "Has been read" : "Hasn't been read";
     card.appendChild(read);
     let changeReadingStatusButton = document.createElement("button");
     changeReadingStatusButton.classList.add("change-reading-status");
     changeReadingStatusButton.textContent = "READ/UNREAD";
     changeReadingStatusButton.addEventListener("click", () => {
-      changeReadingStatus(myLibrary.indexOf(book));
+      this.changeReadingStatus();
     });
     card.appendChild(changeReadingStatusButton);
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("delete");
     deleteButton.textContent = "DELETE";
     deleteButton.addEventListener("click", () => {
-      deleteBook(myLibrary.indexOf(book));
+      this.deleteBook();
     });
     card.appendChild(deleteButton);
     bookcase.appendChild(card);
-  });
+  }
+
+  changeReadingStatus() {
+    this.read = (this.read === "yes") ? "no" : "yes";
+    displayBooks();
+  }
+
+  deleteBook() {
+    myLibrary.splice(myLibrary.indexOf(this), 1);
+    displayBooks();
+  }
 }
 
 function openNewBookForm() {
@@ -91,14 +97,14 @@ function cancelNewBook() {
   formContainer.classList.add("hidden");
 }
 
-function deleteBook(index) {
-  myLibrary.splice(index, 1);
-  displayBooks();
-}
+function displayBooks() {
+  while (bookcase.firstChild) {
+    bookcase.removeChild(bookcase.firstChild);
+  }
 
-function changeReadingStatus(index) {
-  myLibrary[index].read = (myLibrary[index].read==="yes") ? "no" : "yes";
-  displayBooks();
+  myLibrary.forEach(book => {
+    book.createCard();
+  })
 }
 
 newBookButton.addEventListener("click", openNewBookForm);
